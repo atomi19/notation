@@ -1,0 +1,21 @@
+@media (max-width: 600px) {
+    .tasks-layout {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .tasks-actions {
+        width: 100%;
+    }
+
+    .add-task, 
+    .edit-task {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .task {
+        width: 100%;
+        max-width: 100%;
+    }
+}

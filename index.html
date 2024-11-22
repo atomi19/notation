@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notation</title>
+    <link rel="stylesheet" href="src/styles/style.css">
+</head>
+<body onload="loadTasks()">
+    <header class="header">
+        <h1>Notation</h1>
+    </header>
+
+    <main class="main">
+        <div class="tasks-layout" id="tasksLayout">
+            <!-- actions section -->
+            <div class="tasks-actions">
+                <h2 class="tasks-actions__title">Your Tasks</h2>
+                <button class="tasks-actions__add-btn" onclick="showTaskAdding()" id="taskAddBtn">+</button>
+            </div>
+
+            <!-- add task section -->
+            <div class="add-task" id="addTaskContainer" style="display: none;">
+                <div class="add-task__top">
+                    <input type="text" class="add-task__name-input" id="taskName" placeholder="Task name*">
+                    <input type="text" class="add-task__description-input" id="taskDescription" placeholder="Task description">
+                </div>
+                <div class="add-task__bottom">
+                    <button class="add-task__cancel-btn" id="cancelBtn" onclick="hideTaskAdding()">Cancel</button>
+                    <button class="add-task__add-btn" id="addTaskBtn" onclick="addTask()">Add task</button>
+                </div>
+            </div>
+
+            <!-- edit task section -->
+            <div class="edit-task" id="editTaskContainer" style="display: none;">
+                <div class="edit-task__top">
+                    <input type="text" class="edit-task__name-input" id="editTaskName" placeholder="Task name*">
+                    <input type="text" class="edit-task__description-input" id="editTaskDescription" placeholder="Task description">
+                </div>
+                <div class="edit-task__bottom">
+                    <button class="edit-task__cancel-btn" id="editCancelBtn" onclick="hideTaskEditing()">Cancel</button>
+                    <button class="edit-task__edit-btn" id="editSaveBtn" onclick="saveEditedTask()">Edit task</button>
+                </div>
+            </div>
+
+            <!-- tasks list section -->
+            <div class="tasks-empty-message" id="tasksEmptyMessage" style="display: none;">
+                <p>No tasks added yet</p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="src/js/storage.js"></script>
+    <script src="src/js/taskManager.js"></script>
+    <script src="src/js/ui.js"></script>
+</body>
+</html>

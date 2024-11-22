@@ -1,0 +1,28 @@
+input {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-xs);
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+}
+
+input:focus {
+    border-bottom: 1px solid var(--border-color);
+}
+
+button {
+    transition: 0.2s all;
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    padding: var(--spacing-xs);
+    border: 1px solid var(--border-color);
+    border-radius: var(--spacing-xs);
+    border: none;
+    background-color: rgb(245, 245, 245);
+}
+
+img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
