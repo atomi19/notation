@@ -21,9 +21,17 @@ const loadTasks = () => {
     displayMessageIfNoTasks();
 
     tasks.forEach(task => {
-        const tasksLayout = document.getElementById("tasksLayout");
         const taskItem = createTaskEl(task);
+        let whereToAppendTask;
 
-        tasksLayout.append(taskItem)
+        if(task.isPinned) {
+            whereToAppendTask = document.getElementById("tasksLayoutPinned");
+        } else {
+            whereToAppendTask = document.getElementById("tasksLayoutMain");
+        }
+
+        whereToAppendTask.append(taskItem);
+
+        hasPinnedTask();
     });
 };

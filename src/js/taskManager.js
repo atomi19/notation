@@ -11,19 +11,21 @@ const addTask = () => {
             id: Date.now(),
             name: taskName.value,
             description: taskDescription.value,
-            isDone: false
+            isDone: false,
+            isPinned: false
         }
 
         tasks.push(newTask);
         saveTasks(tasks);
 
-        const tasksLayout = document.getElementById("tasksLayout");
+        const tasksLayout = document.getElementById("tasksLayoutMain");
         const taskItem = createTaskEl(newTask);
 
         tasksLayout.append(taskItem);
 
         taskName.value = "";
         hideTaskAdding();
+        hasPinnedTask();
         displayMessageIfNoTasks();
     } else {
         console.error("Task name cannot be empty");
@@ -43,6 +45,7 @@ const deleteTask = (taskId) => {
         taskElement.remove();  
     } 
 
+    hasPinnedTask();
     displayMessageIfNoTasks();
 };
 
@@ -93,4 +96,24 @@ const markTaskAsDone = (event) => {
     } else {
         taskItem.classList.remove("done");
     }
+};
+
+const pinTask = (taskId) => {
+    const taskElement = document.getElementById(taskId);
+
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === taskId);
+
+    task.isPinned = !task.isPinned;
+
+    saveTasks(tasks);
+
+    if(task.isPinned) {
+        document.getElementById("tasksLayoutPinned").appendChild(taskElement);
+    } else {
+        document.getElementById("tasksLayoutMain").appendChild(taskElement);
+    }
+
+    hasPinnedTask();
+    displayMessageIfNoTasks();
 };

@@ -18,11 +18,22 @@ main {
     width: 100%;
 }
 
+/* tasks layouts */
 .tasks-layout {
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: auto;
+}
+
+.tasks-layout__pinned, 
+.tasks-layout__main {
+    display: flex;
+    flex-direction: column;
+}
+
+#allTasksMessage {
+    padding-top: var(--spacing-md);
 }
 
 /* add/edit task container */

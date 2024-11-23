@@ -89,6 +89,37 @@ const createContextMenu = (taskId) => {
     menu.className = "context-menu";
 
     // menu items
+    // pin item
+    const pinItem = document.createElement("div");
+    pinItem.className = "context-menu__item";
+
+    const pinIcon = document.createElement("img");
+    pinIcon.className = "pin-icon";
+    pinIcon.src = "public/icons/pin.svg";
+    pinIcon.alt = "Pin";
+
+    const unpinIcon = document.createElement("img");
+    unpinIcon.className = "unpin-icon";
+    unpinIcon.src = "public/icons/unpin.svg";
+    unpinIcon.alt = "Unpin";
+
+    const currentTask = getTasks().find(t => t.id ===taskId); // get current task
+
+    // check if selected task is pinned or not
+    if(currentTask.isPinned) {
+        // task is pinned, so show unpin icon
+        pinItem.append(unpinIcon, document.createTextNode("Unpin Task"));
+    } else {
+        // task is not pinned, so show pin icon
+        pinItem.append(pinIcon, document.createTextNode("Pin Task"));
+    }
+
+    // event listener for pin item
+    pinItem.addEventListener("click", () => {
+        pinTask(taskId);
+        menu.remove();
+    });
+
     // edit item
     const editItem = document.createElement('div');
     editItem.className = 'context-menu__item';
@@ -104,7 +135,6 @@ const createContextMenu = (taskId) => {
         showTaskEditing(taskId);
         menu.remove(); 
     });
-
 
     // delete item
     const deleteItem = document.createElement('div');
@@ -123,7 +153,7 @@ const createContextMenu = (taskId) => {
     });
 
     // append items to the menu
-    menu.append(editItem, deleteItem);
+    menu.append(pinItem, editItem, deleteItem);
 
     document.body.append(menu);
 
@@ -231,11 +261,37 @@ const displayMessageIfNoTasks = () => {
     const tasks = getTasks();
 
     const noTasksMessage = document.getElementById("tasksEmptyMessage");
+    const tasksLayoutMain = document.getElementById("tasksLayoutMain");
+    const tasksLayoutPinned = document.getElementById("tasksLayoutPinned")
 
     // check if user have no task
     if(tasks.length === 0) {
-        noTasksMessage.style.display = "flex";
+        noTasksMessage.style.display = "flex"; // show label that user have no tasks
+        tasksLayoutMain.style.display = "none"; // hide main div 
+        tasksLayoutPinned.style.display = "none";// hide pinned div
     } else {
         noTasksMessage.style.display = "none";
+
+        // check if these at least one non pinned task
+        const nonPinnedTasks = tasks.filter(t=>!t.isPinned); 
+
+        if(nonPinnedTasks.length > 0) {
+            tasksLayoutMain.style.display = "flex"; // show main div
+        } else {
+            tasksLayoutMain.style.display = "none"; // hide main div
+        }
     }
 };
+
+const hasPinnedTask = () => {
+    const tasks = getTasks();
+    const tasksLayoutPinned = document.getElementById("tasksLayoutPinned");
+    const isThereAnyPinnedTask = tasks.some(task => task.isPinned); 
+
+    // check if there some pinned task
+    if(isThereAnyPinnedTask) {
+        tasksLayoutPinned.style.display = "flex";
+    } else {
+        tasksLayoutPinned.style.display = "none";
+    }
+}
