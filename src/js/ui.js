@@ -295,3 +295,14 @@ const hasPinnedTask = () => {
         tasksLayoutPinned.style.display = "none";
     }
 }
+
+/* function to automatically resize textarea if description is multiline */ 
+const autoResizeTextarea = (event) => {
+    const textarea = event.target; // get textarea element that trigerred the event
+
+    // set height to auto
+    textarea.style.height = "auto";
+
+    // set height of textarea to match scrollHeight
+    textarea.style.height = `${textarea.scrollHeight}px`;
+}

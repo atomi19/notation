@@ -119,6 +119,7 @@ main {
 }
 
 .task__description {
+    white-space:pre-wrap;
     border-radius: 0px;
     padding-top: 3px;
     font-size: 13px;

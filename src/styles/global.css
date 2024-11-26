@@ -26,3 +26,17 @@ img {
     align-items: center;
     justify-content: center;
 }
+
+textarea {
+    font-size: 13px;
+    padding: var(--spacing-xs);
+    resize: none;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+}
+
+textarea:focus {
+    border: 1px solid var(--border-color);
+}
