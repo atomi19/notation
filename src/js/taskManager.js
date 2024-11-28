@@ -51,25 +51,33 @@ const deleteTask = (taskId) => {
 
 // get and save edited task to local storage
 const saveEditedTask = (taskId) => {
+    // get new task name and description 
     const editTaskName = document.getElementById("editTaskName").value;
     const editTaskDescription = document.getElementById("editTaskDescription").value;
 
     const tasks = getTasks();
     const task = tasks.find(t => t.id === taskId);
 
-    if (task) {
-        // get old name and description from local storage
-        task.name = editTaskName;
-        task.description = editTaskDescription;
-
-        saveTasks(tasks); 
-
-        // update task in the DOM
+    if (editTaskName.trim() !== "") {
         const taskElement = document.getElementById(taskId);
 
+        // set new task name
+        task.name = editTaskName; 
         taskElement.querySelector(".task__name").textContent = editTaskName;
-        taskElement.querySelector(".task__description").textContent = editTaskDescription;
 
+        // set new task description
+        task.description = editTaskDescription;
+        const taskDescriptionEl =  taskElement.querySelector(".task__description");
+        taskDescriptionEl.textContent = editTaskDescription;
+
+        // if task description is not empty then show it, else hide it
+        if(editTaskDescription.trim() !== "") {
+            taskDescriptionEl.style.display = "flex";
+        } else {
+            taskDescriptionEl.style.display = "none";
+        }
+
+        saveTasks(tasks); // save everything to local storage
         hideTaskEditing(); // hide edit form
     }
 };
