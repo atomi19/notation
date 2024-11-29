@@ -311,16 +311,29 @@ const autoResizeTextarea = (event) => {
 const searchTask = () => {
     // get search query entered by the user
     const searchQuery = document.getElementById("searchTask").value;
+    
+    const pinnedTasksLabel = document.getElementById("pinnedTasksMessage");
+    const allTasksLabel = document.getElementById("allTasksMessage");
+    const noTasksFoundMessage = document.getElementById("noTasksFoundMessage");
 
     const tasks = getTasks();
 
     // check if search query is not empty
     if(searchQuery.trim() !== "") {
-        // hide all tasks
-        hideAllTasks(tasks);
+        hideAllTasks(tasks); // hide all tasks
+
+        pinnedTasksLabel.style.display = "none"; // hide pinned tasks label
+        allTasksLabel.style.display = "none"; // hide all tasks label
 
         // filter the tasks based on if task name or description contains search query
         const tasksQuery = filterTasks(tasks, searchQuery);
+
+        // check if tasksQuery array is empty, so no tasks were found
+        if(tasksQuery.length === 0) {
+            noTasksFoundMessage.style.display = "flex";
+        } else {
+            noTasksFoundMessage.style.display = "none";
+        }
 
         // get IDs of the tasks that matched search query
         const foundTasksIds = tasksQuery.map(item => item.id);
@@ -328,6 +341,10 @@ const searchTask = () => {
         // show all tasks that matched search query
         showTasksByIds(foundTasksIds);
     } else {
+        pinnedTasksLabel.style.display = "flex"; // show pinned tasks label
+        allTasksLabel.style.display = "flex"; // show all tasks label
+        noTasksFoundMessage.style.display = "none"; // hide no tasks label
+
         // show all tasks if search query is empty
         showTasksByIds(tasks.map(task => task.id));
     }

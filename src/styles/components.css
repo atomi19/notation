@@ -132,7 +132,7 @@ main {
     background-color: transparent;
 }
 
-.tasks-empty-message {
+.tasks-empty-message, .no-tasks-found-message {
     padding-top: 20vh;
     align-items: center;
     justify-content: center;
