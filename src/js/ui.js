@@ -306,3 +306,52 @@ const autoResizeTextarea = (event) => {
     // set height of textarea to match scrollHeight
     textarea.style.height = `${textarea.scrollHeight}px`;
 }
+
+// search for a task
+const searchTask = () => {
+    // get search query entered by the user
+    const searchQuery = document.getElementById("searchTask").value;
+
+    const tasks = getTasks();
+
+    // check if search query is not empty
+    if(searchQuery.trim() !== "") {
+        // hide all tasks
+        hideAllTasks(tasks);
+
+        // filter the tasks based on if task name or description contains search query
+        const tasksQuery = filterTasks(tasks, searchQuery);
+
+        // get IDs of the tasks that matched search query
+        const foundTasksIds = tasksQuery.map(item => item.id);
+
+        // show all tasks that matched search query
+        showTasksByIds(foundTasksIds);
+    } else {
+        // show all tasks if search query is empty
+        showTasksByIds(tasks.map(task => task.id));
+    }
+}
+
+// hide all tasks 
+// it needs to hide all tasks and show only tasks with specific ids
+const hideAllTasks = (tasks) => {
+    tasks.forEach(task => {
+        document.getElementById(task.id).style.display = "none";
+    });
+}
+
+// filter tasks by the search query
+const filterTasks = (tasks, searchQuery) => {
+    return tasks.filter(item => 
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+}
+
+// show tasks with specific id
+const showTasksByIds = (taskIds) => {
+    taskIds.forEach(taskId => {
+        document.getElementById(taskId).style.display = "flex";
+    });
+}

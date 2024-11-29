@@ -15,8 +15,12 @@
         <div class="tasks-layout" id="tasksLayout">
             <!-- actions section -->
             <div class="tasks-actions">
-                <h2 class="tasks-actions__title">Your Tasks</h2>
-                <button class="tasks-actions__add-btn" onclick="showTaskAdding()" id="taskAddBtn">+</button>
+                <div class="tasks-actions__left">
+                    <input type="text" id="searchTask" placeholder="Search" oninput="searchTask()">
+                </div>
+                <div class="tasks-actions__right">
+                    <button class="tasks-actions__add-btn" onclick="showTaskAdding()" id="taskAddBtn">+</button>
+                </div>
             </div>
 
             <!-- add task section -->
