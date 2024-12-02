@@ -81,9 +81,10 @@ const createTaskEl = (task) => {
 // create context menu 
 const createContextMenu = (taskId) => {
     const existingMenu = document.querySelector(".context-menu");
+
     if(existingMenu) {
         existingMenu.remove();
-    }
+    };
 
     const menu = document.createElement("div");
     menu.className = "context-menu";
@@ -93,15 +94,13 @@ const createContextMenu = (taskId) => {
     const pinItem = document.createElement("div");
     pinItem.className = "context-menu__item";
 
-    const pinIcon = document.createElement("img");
+    const pinIcon = document.createElement("div");
     pinIcon.className = "pin-icon";
-    pinIcon.src = "public/icons/pin.svg";
-    pinIcon.alt = "Pin";
+    pinIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3c3c3c"><path d="M620-471.54 691.54-400v60H510v220l-30 30-30-30v-220H268.46v-60L340-471.54V-760h-40v-60h360v60h-40v288.46ZM354-400h252l-46-46v-314H400v314l-46 46Zm126 0Z"/></svg>';
 
-    const unpinIcon = document.createElement("img");
+    const unpinIcon = document.createElement("div");
     unpinIcon.className = "unpin-icon";
-    unpinIcon.src = "public/icons/unpin.svg";
-    unpinIcon.alt = "Unpin";
+    unpinIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3c3c3c"><path d="M660-820v60h-40v307l-60-60v-247H400v87l-64.31-64.31-20.3-43H300V-820h360ZM480-90l-30-30v-220H268.46v-60L340-471.54v-62.92l-254.77-256 42.16-42.15 689.84 689.84-43.39 42.15L534.46-340H510v220l-30 30ZM354-400h121.23l-74-73.23L400-446l-46 46Zm126-193Zm-78.77 119.77Z"/></svg>'
 
     const currentTask = getTasks().find(t => t.id ===taskId); // get current task
 
@@ -124,10 +123,10 @@ const createContextMenu = (taskId) => {
     const editItem = document.createElement('div');
     editItem.className = 'context-menu__item';
 
-    const editIcon = document.createElement("img");
+    const editIcon = document.createElement("div");
     editIcon.className = "edit-icon";
-    editIcon.src = "public/icons/edit.svg";
-    editIcon.alt = "Edit";
+    editIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3c3c3c"><path d="M200-200h50.46l409.46-409.46-50.46-50.46L200-250.46V-200Zm-60 60v-135.38l527.62-527.39q9.07-8.24 20.03-12.73 10.97-4.5 23-4.5t23.3 4.27q11.28 4.27 19.97 13.58l48.85 49.46q9.31 8.69 13.27 20 3.96 11.31 3.96 22.62 0 12.07-4.12 23.03-4.12 10.97-13.11 20.04L275.38-140H140Zm620.38-570.15-50.23-50.23 50.23 50.23Zm-126.13 75.9-24.79-25.67 50.46 50.46-25.67-24.79Z"/></svg>';
+
     editItem.append(editIcon, document.createTextNode("Edit Task"));
 
     // event listener for edit item 
@@ -140,10 +139,10 @@ const createContextMenu = (taskId) => {
     const deleteItem = document.createElement('div');
     deleteItem.className = 'context-menu__item';
 
-    const deleteIcon = document.createElement("img");
+    const deleteIcon = document.createElement("div");
     deleteIcon.className = "delete-icon";
-    deleteIcon.src = "public/icons/delete.svg";
-    deleteIcon.alt = "Delete";
+    deleteIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3c3c3c"><path d="M292.31-140q-29.92 0-51.12-21.19Q220-182.39 220-212.31V-720h-40v-60h180v-35.38h240V-780h180v60h-40v507.69Q740-182 719-161q-21 21-51.31 21H292.31ZM680-720H280v507.69q0 5.39 3.46 8.85t8.85 3.46h375.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-720ZM376.16-280h59.99v-360h-59.99v360Zm147.69 0h59.99v-360h-59.99v360ZM280-720v520-520Z"/></svg>';
+
     deleteItem.append(deleteIcon, document.createTextNode("Delete Task"));
 
     // event listener for delete item
